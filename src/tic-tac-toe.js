@@ -1,8 +1,10 @@
 class TicTacToe {
     constructor() {
-    this.playField=[[,,],[,,],[,,]];
-    this.counter=0;
-    this.playerSymbol='';
+    this.playField=[[null,null,null],
+    [null,null,null],
+    [null,null,null]];
+    this.counter=1;
+    this.playerSymbol='x';
     this.winner='';
     
     }
@@ -15,10 +17,10 @@ class TicTacToe {
       let count=this.counter;
       
       if((count+2)%2==0){
-        this.playField[rowIndex-1][columnIndex-1]='x';
+        this.playField[rowIndex][columnIndex]='x';
         this.playerSymbol='x';
         }else{
-        this.playField[rowIndex-1][columnIndex-1]='o';
+        this.playField[rowIndex][columnIndex]='o';
         this.playerSymbol='o';
         }
         
@@ -60,7 +62,7 @@ class TicTacToe {
         else if(fld[0][2]==fld[1][1]&&fld[1][1]==fld[2][0]){
         this.winner=fld[0][2];}
         
-          if(this.winner!=undefined){
+          if(this.winner!=null){
             
             return this.winner;
             }else{
@@ -94,10 +96,9 @@ class TicTacToe {
     }
 
     getFieldValue(rowIndex, colIndex) {
-      return this.playField[rowIndex-1][colIndex-1];
+      return this.playField[rowIndex][colIndex];
 
     }
 }
-
 
 module.exports = TicTacToe;
