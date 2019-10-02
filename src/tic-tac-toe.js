@@ -1,55 +1,103 @@
 class TicTacToe {
     constructor() {
-    this.counter=2;
     this.playField=[[,,],[,,],[,,]];
-    this.currentSymbol="o";
+    this.counter=0;
+    this.playerSymbol='';
+    this.winner='';
+    
     }
 
     getCurrentPlayerSymbol() {
-      return this.currentSymbol;
-
+      return this.playerSymbol;
     }
 
     nextTurn(rowIndex, columnIndex) {
-        if(this.counter%2==0){
-        this.playFild[rowIndex][columnIndex]="x";
-        this.currentSymbol="x";
+      let count=this.counter;
+      
+      if((count+2)%2==0){
+        this.playField[rowIndex-1][columnIndex-1]='x';
+        this.playerSymbol='x';
         }else{
-        this.playFild[rowIndex][columnIndex]="o"; 
-        this.currentSymbol="o";
+        this.playField[rowIndex-1][columnIndex-1]='o';
+        this.playerSymbol='o';
         }
-        this.counter++;
-        console.log(this.playFild);
         
-
+      this.counter++;
     }
 
     isFinished() {
+      let field=this.playField;
+      
+      for(let i=0; i<=2;i++){
+        for(let j=0; j<=2; j++){
+          if(field[i][j]==undefined){
+            return false;
+            }
+          }
+        }
+      return true;
 
     }
 
     getWinner() {
+      let char;
+      let fld=this.playField;
+        if(fld[0][0]==fld[0][1]&&fld[0][1]==fld[0][2]){
+        this.winner=fld[0][0];
+       }
+        else if(fld[1][0]==fld[1][1]&&fld[1][1]==fld[1][2]){
+        this.winner=fld[1][0];}
+        else if(fld[2][0]==fld[2][1]&&fld[2][1]==fld[2][2]){
+        this.winner=fld[2][0];}
+        else if(fld[0][0]==fld[1][0]&&fld[1][0]==fld[2][0]){
+        this.winner=fld[0][0];}
+        else if(fld[0][1]==fld[1][1]&&fld[1][1]==fld[2][1]){
+        this.winner=fld[0][1];}
+        else if(fld[0][2]==fld[1][2]&&fld[1][2]==fld[2][2]){
+        this.winner=fld[0][2];}
+        else if(fld[0][0]==fld[1][1]&&fld[1][1]==fld[2][2]){
+        this.winner=fld[0][0];}
+        else if(fld[0][2]==fld[1][1]&&fld[1][1]==fld[2][0]){
+        this.winner=fld[0][2];}
+        
+          if(this.winner!=undefined){
+            
+            return this.winner;
+            }else{
+              
+            return null;}
+            
+}
+      
 
-    }
+    
 
     noMoreTurns() {
-      let arr=this.playField;
-      arr.forEach(function(item)){
-        
-        }
       
+      let field=this.playField;
+      
+      for(let i=0; i<=2;i++){
+        for(let j=0; j<=2; j++){
+          if(field[i][j]==undefined){
+            return false;
+            }
+          }
+        }
+      return true;
 
     }
 
     isDraw() {
-
+      if(this.getWinner()==null&&this.noMoreTurns()==true){
+        return true;
+        }else{return false;}
     }
 
     getFieldValue(rowIndex, colIndex) {
+      return this.playField[rowIndex-1][colIndex-1];
 
     }
 }
-
 
 
 module.exports = TicTacToe;
